@@ -1,18 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
-
-  <title>Ma To Do List</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Ma List Todo</title>
 </head>
-<body class="bg-gray-300">
-  <div class="container mx-auto p-4 ">
-  <header class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold">Ma To DO List</h1>
-    <button id="" class="bg-blue-400 text-white px-4 py-2 rounded">Ajouter Une Tàche</button>
+
+<body class="bg-gray-100 flex flex-col items-center py-8">
+  <header class="flex justify-center mb-6 w-full">
+    <button id="ajouterTache" class="bg-blue-500 text-white font-bold px-4 py-2 rounded">Ajouter Tâche +</button>
+    <input type="text" id="filtrerInput" placeholder="Filtrer par Priorité" class="pl-4 pr-8 py-2 border rounded ml-4">
   </header>
-</div>
+
+  <div class="text-lg font-semibold mb-4" id="compteurTotal">Total des Tâches : 0</div>
+
+  <main class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl">
+    
+    <section id="sectionATfaire" class="bg-white rounded-lg p-4 shadow">
+      <header>
+        <h2 class="text-lg font-semibold mb-4">À FAIRE <span id="compteurAFaire" class="text-gray-500">|0</span></h2>
+      </header>
+      <div class="space-y-3" id="listeAFaire"></div>
+    </section>
+
+    
+    <section id="sectionEnCours" class="bg-white rounded-lg p-4 shadow">
+      <header>
+        <h2 class="text-lg font-semibold mb-4">EN COURS <span id="compteurEnCours" class="text-gray-500">|0</span></h2>
+      </header>
+      <div class="space-y-3" id="listeEnCours"></div>
+    </section>
+
+    
+    <section id="sectionTermine" class="bg-white rounded-lg p-4 shadow">
+      <header>
+        <h2 class="text-lg font-semibold mb-4">TERMINÉ <span id="compteurTermine" class="text-gray-500">|0</span></h2>
+      </header>
+      <div class="space-y-3" id="listeTermine"></div>
+    </section>
+  </main>
+
+  <!-- Formulaire pour ajouter la nouvelle Tache -->
+  <form id="FormTache" class="fixed inset-0 hidden bg-gray-800 bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96 space-y-4">
+      <h2 class="text-2xl font-bold">Nouvelle Tâche</h2>
+      <input type="text" id="titre" placeholder="Titre" class="border p-2 w-full" required>
+      <textarea id="description" placeholder="Description" class="border p-2 w-full" required></textarea>
+      <input type="date" id="echeance" class="border p-2 w-full" required>
+      <select id="statut" class="border p-2 w-full">
+        <option value="todo">À Faire</option>
+        <option value="doing">En Cours</option>
+        <option value="done">Terminé</option>
+      </select>
+      <select id="priorite" class="border p-2 w-full">
+        <option value="P1">P1 </option>
+        <option value="P2">P2 </option>
+        <option value="P3">P3 </option>
+      </select>
+      <div class="flex justify-end gap-2">
+        <button type="button" id="fermerForm" class="bg-red-500 text-white px-4 py-2 rounded">Annuler</button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Ajouter Tâche</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- formulaire pour plus détaille -->
+  <div id="FormDetailTache" class="fixed inset-0 hidden bg-gray-800 bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96 space-y-4">
+      <h2 class="text-2xl font-bold">Détails de la Tâche</h2>
+      <p><strong>Titre :</strong> <span id="detailTitre"></span></p>
+      <p><strong>Description :</strong> <span id="detailDescription"></span></p>
+      <p><strong>Échéance :</strong> <span id="detailEcheance"></span></p>
+      <p><strong>Status :</strong> <span id="detailStatut"></span></p>
+      <p><strong>Priorité :</strong> <span id="detailPriorite"></span></p>
+      <div class="flex justify-end gap-2">
+        <button id="boutonModifierTache" class="bg-yellow-500 text-white px-4 py-2 rounded">Modifier</button>
+        <button id="fermerFormDetail" class="bg-red-500 text-white px-4 py-2 rounded">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
 </body>
+
 </html>
