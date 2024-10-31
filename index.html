@@ -43,45 +43,7 @@
     </section>
   </main>
 
-  <!-- Formulaire pour ajouter la nouvelle Tache -->
-  <form id="FormTache" class="fixed inset-0 hidden bg-gray-800 bg-opacity-50 flex justify-center items-center">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-96 space-y-4">
-      <h2 class="text-2xl font-bold">Nouvelle Tâche</h2>
-      <input type="text" id="titre" placeholder="Titre" class="border p-2 w-full" required>
-      <textarea id="description" placeholder="Description" class="border p-2 w-full" required></textarea>
-      <input type="date" id="echeance" class="border p-2 w-full" required>
-      <select id="statut" class="border p-2 w-full">
-        <option value="todo">À Faire</option>
-        <option value="doing">En Cours</option>
-        <option value="done">Terminé</option>
-      </select>
-      <select id="priorite" class="border p-2 w-full">
-        <option value="P1">P1 </option>
-        <option value="P2">P2 </option>
-        <option value="P3">P3 </option>
-      </select>
-      <div class="flex justify-end gap-2">
-        <button type="button" id="fermerForm" class="bg-red-500 text-white px-4 py-2 rounded">Annuler</button>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Ajouter Tâche</button>
-      </div>
-    </div>
-  </form>
 
-  <!-- formulaire pour plus détaille -->
-  <div id="FormDetailTache" class="fixed inset-0 hidden bg-gray-800 bg-opacity-50 flex justify-center items-center">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-96 space-y-4">
-      <h2 class="text-2xl font-bold">Détails de la Tâche</h2>
-      <p><strong>Titre :</strong> <span id="detailTitre"></span></p>
-      <p><strong>Description :</strong> <span id="detailDescription"></span></p>
-      <p><strong>Échéance :</strong> <span id="detailEcheance"></span></p>
-      <p><strong>Status :</strong> <span id="detailStatut"></span></p>
-      <p><strong>Priorité :</strong> <span id="detailPriorite"></span></p>
-      <div class="flex justify-end gap-2">
-        <button id="boutonModifierTache" class="bg-yellow-500 text-white px-4 py-2 rounded">Modifier</button>
-        <button id="fermerFormDetail" class="bg-red-500 text-white px-4 py-2 rounded">Fermer</button>
-      </div>
-    </div>
-  </div>
 
   <script src="main.js"></script>
 </body>
