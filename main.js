@@ -41,7 +41,7 @@ function ajouterTache(titre, description, echeance, statut, priorite) {
         <p class="text-xs">Priorité : ${priorite}</p>
         <div class="flex gap-2 mt-2">
           <button class="edit-button bg-yellow-500 text-white px-2 py-1 rounded">Modifier</button>
-          <button class="delete-button bg-red-500 text-white px-2 py-1 rounded">Supprimer</button>
+          <button class="supprimer-button bg-red-500 text-white px-2 py-1 rounded">Supprimer</button>
         </div>
       `;
     if (statut === "todo") {
@@ -51,6 +51,12 @@ function ajouterTache(titre, description, echeance, statut, priorite) {
     } else {
         listeTermine.appendChild(tacheElement);
     }
+    //button supprimer une tache
+    tacheElement.querySelector(".supprimer-button").addEventListener("click", () => {
+        const statutAAjouter = statut === "todo" ? "todo" : statut === "doing" ? "doing" : "done";
+        tacheElement.remove();
+      
+      });
 }
 
 //faire un submit à modal
@@ -65,4 +71,6 @@ modalTache.addEventListener("submit", (event) => {
     ajouterTache(titre, description, echeance, statut, priorite);
     modalTache.classList.add("hidden");
 });
+
+
 
