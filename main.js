@@ -9,6 +9,7 @@ const listeAFaire = document.getElementById("listeAFaire");
 const listeEnCours = document.getElementById("listeEnCours");
 const listeTermine = document.getElementById("listeTermine");
 
+const compteurTotal = document.getElementById("compteurTotal");
 
 // Variable pour stocker la tâche actuelle 
 let tacheActuel = null;
@@ -81,6 +82,7 @@ function ajouterTache(titre, description, echeance, statut, priorite) {
     tacheElement.querySelector(".supprimer-button").addEventListener("click", (e) => {
         e.stopPropagation(); 
         tacheElement.remove();
+        mettreAJourCompteurTotal();
     });
 
     // modifier
@@ -108,11 +110,13 @@ function ajouterTache(titre, description, echeance, statut, priorite) {
 
    
     ajouterDansSection(tacheElement, statut);
+    mettreAJourCompteurTotal();   
 }
 
 
 function changerStatutTache(tacheElement, ancienStatut, nouveauStatut) {
     ajouterDansSection(tacheElement, nouveauStatut);
+    mettreAJourCompteurTotal();
 }
 
 
@@ -155,3 +159,7 @@ modalTache.addEventListener("submit", (event) => {
 });
 
 
+function mettreAJourCompteurTotal() {
+    const total = document.querySelectorAll(".border-t-4").length;
+    compteurTotal.textContent = `Total des Tâches : ${total}`;
+}      
