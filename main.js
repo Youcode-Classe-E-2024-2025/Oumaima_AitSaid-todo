@@ -10,6 +10,9 @@ const listeEnCours = document.getElementById("listeEnCours");
 const listeTermine = document.getElementById("listeTermine");
 
 const compteurTotal = document.getElementById("compteurTotal");
+const compteurAFaire = document.getElementById("compteurAFaire");
+const compteurEnCours = document.getElementById("compteurEnCours");
+const compteurTermine = document.getElementById("compteurTermine");
 
 // Variable pour stocker la tâche actuelle 
 let tacheActuel = null;
@@ -82,6 +85,7 @@ function ajouterTache(titre, description, echeance, statut, priorite) {
     tacheElement.querySelector(".supprimer-button").addEventListener("click", (e) => {
         e.stopPropagation(); 
         tacheElement.remove();
+        mettreAJourCompteurTache(statut, -1); n
         mettreAJourCompteurTotal();
     });
 
@@ -110,12 +114,15 @@ function ajouterTache(titre, description, echeance, statut, priorite) {
 
    
     ajouterDansSection(tacheElement, statut);
+    mettreAJourCompteurTache(statut, 1);
     mettreAJourCompteurTotal();   
 }
 
 
 function changerStatutTache(tacheElement, ancienStatut, nouveauStatut) {
+    mettreAJourCompteurTache(ancienStatut, -1); 
     ajouterDansSection(tacheElement, nouveauStatut);
+    mettreAJourCompteurTache(nouveauStatut, 1); 
     mettreAJourCompteurTotal();
 }
 
@@ -158,6 +165,13 @@ modalTache.addEventListener("submit", (event) => {
     resetModalTache();
 });
 
+function mettreAJourCompteurTache(statut, increment) {
+    const compteurElement = document.getElementById(
+      statut === "todo" ? "compteurAFaire" : statut === "doing" ? "compteurEnCours" : "compteurTermine"
+    );
+    let count = parseInt(compteurElement.textContent.split("|")[1]) + increment;
+    compteurElement.textContent = `|${count}`;
+}
 
 function mettreAJourCompteurTotal() {
     const total = document.querySelectorAll(".border-t-4").length;
