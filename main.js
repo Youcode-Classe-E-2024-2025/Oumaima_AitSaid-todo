@@ -2,6 +2,9 @@
 const modalTache = document.getElementById("modalTache");
 const ajouterTacheButton = document.getElementById("ajouterTache");
 const fermerModalButton = document.getElementById("fermerModal");
+const modalDetailTache = document.getElementById("modalDetailTache");
+const fermerModalDetailButton = document.getElementById("fermerModalDetail");
+
 const listeAFaire = document.getElementById("listeAFaire");
 const listeEnCours = document.getElementById("listeEnCours");
 const listeTermine = document.getElementById("listeTermine");
@@ -19,6 +22,10 @@ ajouterTacheButton.addEventListener("click", () => {
 fermerModalButton.addEventListener("click", () => {
     modalTache.classList.add("hidden");
 });
+//fermer modaldetail
+fermerModalDetailButton.addEventListener("click", () => {
+    modalDetailTache.classList.add("hidden");
+  });
 
 // fonction de vider le modal
 function resetModalTache() {
@@ -45,7 +52,9 @@ function ajouterTache(titre, description, echeance, statut, priorite) {
         </div>
     `;
     
-   
+    tacheElement.addEventListener("click", () => {
+        afficherDetailsTache(titre, description, echeance, statut, priorite);
+      });
     if (statut === "todo") {
         listeAFaire.appendChild(tacheElement);
     } else if (statut === "doing") {
@@ -69,6 +78,7 @@ function ajouterTache(titre, description, echeance, statut, priorite) {
         document.getElementById("priorite").value = priorite;
 
         modalTache.classList.remove("hidden");
+        modalDetailTache.classList.add("hidden");
     });
 }
 
@@ -104,3 +114,12 @@ modalTache.addEventListener("submit", (event) => {
 
     resetModalTache();
 });
+//affiche detaille
+function afficherDetailsTache(titre, description, echeance, statut, priorite) {
+    document.getElementById("detailTitre").textContent = titre;
+    document.getElementById("detailDescription").textContent = description;
+    document.getElementById("detailEcheance").textContent = echeance;
+    document.getElementById("detailStatut").textContent = statut;
+    document.getElementById("detailPriorite").textContent = priorite;
+    modalDetailTache.classList.remove("hidden");
+  }
