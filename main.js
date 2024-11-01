@@ -115,7 +115,7 @@ modalTache.addEventListener("submit", (event) => {
     resetModalTache();
 });
 //affiche detaille
-function afficherDetailsTache(titre, description, echeance, statut, priorite) {
+function afficherDetailstache(titre, description, echeance, statut, priorite) {
     document.getElementById("detailTitre").textContent = titre;
     document.getElementById("detailDescription").textContent = description;
     document.getElementById("detailEcheance").textContent = echeance;
