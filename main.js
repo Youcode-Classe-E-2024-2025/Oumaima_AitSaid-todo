@@ -141,6 +141,24 @@
         const echeance = document.getElementById("echeance").value;
         const statut = document.getElementById("statut").value;
         const priorite = document.getElementById("priorite").value;
+// regex
+        const titreRegex = /^[a-zA-Z0-9 ]{10,}$/;
+        const descriptionRegex = /^.{5,200}$/;
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+        
+        if (!titreRegex.test(titre)) {
+            alert("Le titre doit contenir au moins 10 caractères alphanumeriques");
+            return;
+        }
+        if (description && !descriptionRegex.test(description)) {
+            alert("La description doit contenir entre 5 et 200 caracteres");
+            return;
+        }
+        if (!dateRegex.test(echeance)) {
+            alert("La date doit être au format AAAA-MM-JJ");
+            return;
+        }
 
         if (tacheCourante) {
             
