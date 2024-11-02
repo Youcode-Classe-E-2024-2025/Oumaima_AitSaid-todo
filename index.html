@@ -1,86 +1,85 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
   <link rel="stylesheet" href="style.css">
-  <title>Ma List Todo</title>
+  <title>Ma Liste Todo</title>
 </head>
 
 <body class="bg-gray-100 flex flex-col items-center py-8">
-  <header class="flex justify-center mb-6 w-full">
-    <button id="ajouterTache" class="bg-blue-500 text-white font-bold px-4 py-2 rounded">Ajouter Tâche +</button>
-    <input type="text" id="filtrerInput" placeholder="Filtrer par Priorité" class="pl-4 pr-8 py-2 border rounded ml-4">
+ 
+  <header class="flex justify-between items-center w-full max-w-4xl px-4 mb-8">
+    <button id="ajouterTache" class="bg-blue-600 text-white font-semibold px-5 py-3 rounded-lg shadow-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">Ajouter Tâche +</button>
+    <input type="text" id="filtrerInput" placeholder="Filtrer par Priorité" class="pl-4 pr-10 py-3 text-gray-800 border rounded-lg shadow-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500 ml-4">
   </header>
 
-  <div class="text-lg font-semibold mb-4" id="compteurTotal">Total des Tâches : 0</div>
+  <div class="text-lg font-bold text-gray-700 mb-6" id="compteurTotal">Total des Tâches : <span class="text-blue-600">0</span></div>
 
-  <main class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl">
+  <main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-6xl px-4">
 
-    <section id="sectionATfaire" class="bg-white rounded-lg p-4 shadow">
+    <section id="sectionATfaire" class="bg-white rounded-lg p-6 shadow-lg border-t-4 border-blue-500">
       <header>
-        <h2 class="text-lg font-semibold mb-4">À FAIRE <span id="compteurAFaire" class="text-gray-500">|0</span></h2>
+        <h2 class="text-xl font-bold text-gray-800">À FAIRE <span id="compteurAFaire" class="text-gray-500">| 0</span></h2>
       </header>
-      <div class="space-y-3" id="listeAFaire"></div>
+      <div class="space-y-4 mt-4" id="listeAFaire"></div>
     </section>
 
-
-    <section id="sectionEnCours" class="bg-white rounded-lg p-4 shadow">
+    <section id="sectionEnCours" class="bg-white rounded-lg p-6 shadow-lg border-t-4 border-yellow-500">
       <header>
-        <h2 class="text-lg font-semibold mb-4">EN COURS <span id="compteurEnCours" class="text-gray-500">|0</span></h2>
+        <h2 class="text-xl font-bold text-gray-800">EN COURS <span id="compteurEnCours" class="text-gray-500">| 0</span></h2>
       </header>
-      <div class="space-y-3" id="listeEnCours"></div>
+      <div class="space-y-4 mt-4" id="listeEnCours"></div>
     </section>
 
-
-    <section id="sectionTermine" class="bg-white rounded-lg p-4 shadow">
+    <section id="sectionTermine" class="bg-white rounded-lg p-6 shadow-lg border-t-4 border-green-500">
       <header>
-        <h2 class="text-lg font-semibold mb-4">TERMINÉ <span id="compteurTermine" class="text-gray-500">|0</span></h2>
+        <h2 class="text-xl font-bold text-gray-800">TERMINÉ <span id="compteurTermine" class="text-gray-500">| 0</span></h2>
       </header>
-      <div class="space-y-3" id="listeTermine"></div>
+      <div class="space-y-4 mt-4" id="listeTermine"></div>
     </section>
   </main>
 
   <!-- Formulaire pour ajouter la nouvelle Tache -->
-  <form id="modalTache" class="fixed inset-0 hidden bg-gray-800 bg-opacity-50 flex justify-center items-center">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-96 space-y-4">
-      <h2 class="text-2xl font-bold">Nouvelle Tâche</h2>
-      <input type="text" id="titre" placeholder="Titre" class="border p-2 w-full" required>
-      <textarea id="description" placeholder="Description" class="border p-2 w-full" required></textarea>
-      <input type="date" id="echeance" class="border p-2 w-full" required>
-      <select id="statut" class="border p-2 w-full">
+  <form id="modalTache" class="fixed inset-0 hidden bg-gray-800 bg-opacity-60 flex justify-center items-center">
+    <div class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-lg space-y-6">
+      <h2 class="text-2xl font-bold text-gray-800">Nouvelle Tâche</h2>
+      <input type="text" id="titre" placeholder="Titre" class="border border-gray-300 rounded-lg p-3 w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" required>
+      <textarea id="description" placeholder="Description" class="border border-gray-300 rounded-lg p-3 w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" required></textarea>
+      <input type="date" id="echeance" class="border border-gray-300 rounded-lg p-3 w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500" required>
+      <select id="statut" class="border border-gray-300 rounded-lg p-3 w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
         <option value="todo">À Faire</option>
         <option value="doing">En Cours</option>
         <option value="done">Terminé</option>
       </select>
-      <select id="priorite" class="border p-2 w-full">
-        <option value="P1">P1 </option>
-        <option value="P2">P2 </option>
-        <option value="P3">P3 </option>
+      <select id="priorite" class="border border-gray-300 rounded-lg p-3 w-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
+        <option value="P1">P1</option>
+        <option value="P2">P2</option>
+        <option value="P3">P3</option>
       </select>
-      <div class="flex justify-end gap-2">
-        <button type="button" id="fermerModal" class="bg-red-500 text-white px-4 py-2 rounded">Annuler</button>
-        <button type="submit" id="ajouterTache" class="bg-blue-500 text-white px-4 py-2 rounded">Ajouter Tâche</button>
+      <div class="flex justify-end gap-4">
+        <button type="button" id="fermerModal" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300">Annuler</button>
+        <button type="submit" id="ajouterTache" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">Ajouter Tâche</button>
       </div>
     </div>
   </form>
 
   <!-- formulaire pour plus détaille -->
-  <div id="modalDetailTache" class="fixed inset-0 hidden bg-gray-800 bg-opacity-50 flex justify-center items-center">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-96 space-y-4">
-      <h2 class="text-2xl font-bold">Détails de la Tâche</h2>
-      <p><strong>Titre :</strong> <span id="detailTitre"></span></p>
-      <p><strong>Description :</strong> <span id="detailDescription"></span></p>
-      <p><strong>Échéance :</strong> <span id="detailEcheance"></span></p>
-      <p><strong>Status :</strong> <span id="detailStatut"></span></p>
-      <p><strong>Priorité :</strong> <span id="detailPriorite"></span></p>
-      <div class="flex justify-end gap-2">
-        <button id="fermerModalDetail" class="bg-red-500 text-white px-4 py-2 rounded">Fermer</button>
+  <div id="modalDetailTache" class="fixed inset-0 hidden bg-gray-800 bg-opacity-60 flex justify-center items-center">
+    <div class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-lg space-y-6">
+      <h2 class="text-2xl font-bold text-gray-800">Détails de la Tâche</h2>
+      <p><strong>Titre :</strong> <span id="detailTitre" class="text-gray-700"></span></p>
+      <p><strong>Description :</strong> <span id="detailDescription" class="text-gray-700"></span></p>
+      <p><strong>Échéance :</strong> <span id="detailEcheance" class="text-gray-700"></span></p>
+      <p><strong>Statut :</strong> <span id="detailStatut" class="text-gray-700"></span></p>
+      <p><strong>Priorité :</strong> <span id="detailPriorite" class="text-gray-700"></span></p>
+      <div class="flex justify-end">
+        <button id="fermerModalDetail" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 focus:ring-4 focus:ring-gray-300">Fermer</button>
       </div>
     </div>
   </div>
 
   <script src="main.js"></script>
 </body>
+</html>
