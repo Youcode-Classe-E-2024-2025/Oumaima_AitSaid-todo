@@ -110,8 +110,21 @@
         document.getElementById("detailPriorite").textContent = priorite;
         modalDetailTache.classList.remove("hidden");
     }
-// vider modal
-     function resetModalTache() {
+
+   
+    document.getElementById("filtrerInput").addEventListener("input", (e) => {
+        const valeurFiltre = e.target.value.toUpperCase();
+
+        document.querySelectorAll("section > div > div").forEach(tache => {
+            const textePriorite = tache.querySelector("p.text-xs").textContent.toUpperCase();
+
+            const isPriorityMatch = textePriorite.includes(valeurFiltre);
+            tache.style.display = isPriorityMatch  ? "block" : "none";
+        });
+    });
+
+    //vider le modal
+    function resetModalTache() {
         document.getElementById("titre").value = "";
         document.getElementById("description").value = "";
         document.getElementById("echeance").value = "";
