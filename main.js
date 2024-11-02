@@ -9,7 +9,7 @@
     const listeEnCours = document.getElementById("listeEnCours");
     const listeTermine = document.getElementById("listeTermine");
     
-// Variable pour stocker la tâche actuelle 
+   // Variable pour stocker la tâche actuelle 
     let tacheCourante = null;
 
     // Total task counter
@@ -56,6 +56,10 @@
             </select>
 
         `;
+         // Gestionnaire pour la suppression avec animation de disparition
+    tacheElement.querySelector(".delete-button").addEventListener("click", (e) => {
+        const statutAAjouter = statut;   
+    });
         tacheElement.querySelector(".statut-select").addEventListener("change", (e) => {
             e.stopPropagation();
             const nouveauStatut = e.target.value;
