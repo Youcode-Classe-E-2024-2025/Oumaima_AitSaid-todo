@@ -26,7 +26,6 @@
         modalTache.classList.add("hidden");
     });
 
-    
     fermerModalDetailButton.addEventListener("click", () => {
         modalDetailTache.classList.add("hidden");
     });
@@ -42,15 +41,42 @@
             <h3 class="font-bold text-gray-800">${titre}</h3>
             <p class="text-sm text-gray-600">Échéance : ${echeance}</p>
             <p class="text-xs text-gray-500">Priorité : ${priorite}</p>
+             
+            
             <div class="flex gap-2 mt-2">
                 <button class="edit-button bg-yellow-500 text-white px-2 py-1 rounded">Modifier</button>
                 <button class="delete-button bg-red-500 text-white px-2 py-1 rounded">Supprimer</button>
+              
             </div>
+              <label> changer Statut: </label>
+              <select class="statut-select w-38 border rounded px-2 py-1 text-sm mt-4">
+                <option value="todo" ${statut === "todo" ? "selected" : ""}>À Faire</option>
+                <option value="doing" ${statut === "doing" ? "selected" : ""}>En Cours</option>
+                <option value="done" ${statut === "done" ? "selected" : ""}>Terminé</option>
+            </select>
+
         `;
+        tacheElement.querySelector(".statut-select").addEventListener("change", (e) => {
+            e.stopPropagation();
+            const nouveauStatut = e.target.value;
+            const ancienStatut = statut;
+            if (nouveauStatut === "todo") {
+                listeAFaire.appendChild(tacheElement);
+            } else if (nouveauStatut === "doing") {
+                listeEnCours.appendChild(tacheElement);
+            } else if (nouveauStatut === "done") {
+                listeTermine.appendChild(tacheElement);
+            }
+    
+            mettreAJourCompteurTache(ancienStatut);
+            mettreAJourCompteurTache(nouveauStatut);
+            mettreAJourCompteurTotal();
+            
+            statut = nouveauStatut;
+        });
 
          // supprimer
-        tacheElement.querySelector(".delete-button").addEventListener("click", (e) => {
-            e.stopPropagation();
+        tacheElement.querySelector(".delete-button").addEventListener("click", () => {
             const statutAAjouter = statut === "todo" ? "todo" : statut === "doing" ? "doing" : "done";
             tacheElement.remove();
             mettreAJourCompteurTache(statutAAjouter);
@@ -58,8 +84,7 @@
         });
 
          // modifier
-        tacheElement.querySelector(".edit-button").addEventListener("click", (e) => {
-            e.stopPropagation();
+        tacheElement.querySelector(".edit-button").addEventListener("click", () => {
             tacheCourante = tacheElement;
             document.getElementById("titre").value = titre;
             document.getElementById("description").value = description;
@@ -72,8 +97,18 @@
 
       
         tacheElement.addEventListener("click", () => {
-            afficherDetailsTache(titre, description, echeance, statut, priorite);
+            
+
+
+            if (e.target.classList.contains("statut-select") || 
+            e.target.classList.contains("edit-button") || 
+            e.target.classList.contains("delete-button")) {
+            return; 
+        }
+
+        afficherDetailsTache(titre, description, echeance, statut, priorite);
         });
+        
 
         if (statut === "todo") {
             listeAFaire.appendChild(tacheElement);
@@ -142,7 +177,7 @@
         const statut = document.getElementById("statut").value;
         const priorite = document.getElementById("priorite").value;
 // regex
-        const titreRegex = /^[a-zA-Z0-9 ]{10,}$/;
+        const titreRegex = /^[a-zA-Z0-9 ]{5,15}$/;
         const descriptionRegex = /^.{5,200}$/;
         const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -175,3 +210,4 @@
     });
     
 
+  
